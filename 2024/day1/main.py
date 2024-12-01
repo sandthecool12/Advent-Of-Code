@@ -15,9 +15,6 @@ for x in range(len(leftList)):
     lineTotal = leftList[x]-rightList[x]
     if lineTotal<0:
         lineTotal = lineTotal*-1
-    # print(f'{leftList[x]} - {rightList[x]} = {lineTotal}')
     totalDistance += lineTotal
-    
-
 
 print(totalDistance)
