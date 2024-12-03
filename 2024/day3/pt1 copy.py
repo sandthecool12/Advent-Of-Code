@@ -27,7 +27,6 @@ with open('issue1.txt','r') as file:
                         addIt=False
                         break
                 if addIt:
-                    
                     total += int(num1)*int(num2)
             
 
