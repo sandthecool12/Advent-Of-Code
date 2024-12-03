@@ -1,16 +1,22 @@
 total = 0
 with open('issue1.txt','r') as file:
     for line in file: 
-        mulList = line.split('mul')
+        print(line)
+        mulList = line.split('mul(')
+        print(len(mulList))
+        if len(mulList[0])==0:
+            mulList.pop(0)    
+        print(len(mulList))    
         for chunk in mulList:
-            if chunk[0] == '(' and ')' in chunk:
+            print(chunk)
+            if chunk[0].isnumeric() and ')' in chunk:
                 num1 = ''
                 num2 =''
                 switch = False
                 addIt = True
                 multi = chunk.split(')')
                 for digi in multi[0]:
-                    if digi.isnumeric() or digi == ',' or digi == '(':
+                    if digi.isnumeric() or digi == ',':
                         if digi ==",":
                             switch = True
                         elif switch and digi.isnumeric():
@@ -21,6 +27,7 @@ with open('issue1.txt','r') as file:
                         addIt=False
                         break
                 if addIt:
+                    
                     total += int(num1)*int(num2)
             
 

@@ -1,22 +1,23 @@
-total = 0
+totalDo = 0
+totalDont = 0
 with open('input.txt','r') as file:
     for line in file:
         def multiple(x):
             tot = 0  
-            mulList = x.split('mul')
-            print(mulList)
+            mulList = x.split('mul(')
+            print(len(mulList))
+            if len(mulList[0]) == 0:
+                mulList.pop(0) 
+            print(len(mulList))
             for chunk in mulList:
-                if len(chunk)==0:
-                    continue
-                print(chunk)
-                if chunk[0] == '(' and ')' in chunk:
+                if chunk[0].isnumeric() and ')' in chunk:
                     num1 = ''
                     num2 =''
                     switch = False
                     addIt = True
                     multi = chunk.split(')')
                     for digi in multi[0]:
-                        if digi.isnumeric() or digi == ',' or digi == '(':
+                        if digi.isnumeric() or digi == ',':
                             if digi ==",":
                                 switch = True
                             elif switch and digi.isnumeric():
@@ -29,27 +30,26 @@ with open('input.txt','r') as file:
                     if addIt:
                         tot += int(num1)*int(num2)
             return tot
+        
         splitDo = line.split('do()')
+        print(splitDo[0])
+        print(line)
+        # totalDo += multiple(line)
+        # print(line)
         for do in splitDo:
+            # print('what to seperate:')
             # print(do)
             if "don't()" in do:
                 doList = do.split("don't()")
-                # if len(doList[0]) !=0:
-                total =+multiple(doList[0])
+                print(doList[0])
+                # print('did seperate')
+                # print(doList[0])
+                # print(multiple(doList[0]))
+                totalDont +=multiple(doList[0])
             else:
-                total =+ multiple(do)
-
-        # dont = 
-        # for dontChunk in dont:
-        #     do=''
-        #     if "don't()" in dontChunk:
-        #         do = dontChunk.split("don't()")
-        #         total += multiple(do[0])
-                
-        #     else:
-        #         total += multiple(dontChunk)
-
-            
-
-    
-print(total)
+                print(do)
+                # print("didnt seperate:")
+                # print(do)
+                # print(multiple(do))
+                totalDo += multiple(do)
+print(totalDo+totalDont)
